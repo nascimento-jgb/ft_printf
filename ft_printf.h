@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaonascimento <joaonascimento@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:13:06 by jonascim          #+#    #+#             */
-/*   Updated: 2022/11/10 17:45:58 by jonascim         ###   ########.fr       */
+/*   Updated: 2022/11/12 15:03:28 by joaonascime      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+#include <stdlib.h>
+#include <unistd.h>
 #include <stdarg.h>
+
+# define TYPE "cspdiuxX%"
+
+int 	g_tcount;
 
 typedef struct	s_option
 {

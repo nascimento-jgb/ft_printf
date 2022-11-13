@@ -3,15 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joaonascimento <joaonascimento@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:05:10 by jonascim          #+#    #+#             */
-/*   Updated: 2022/11/10 17:45:57 by jonascim         ###   ########.fr       */
+/*   Updated: 2022/11/12 15:03:26 by joaonascime      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
+extern int g_tcount;
+
+void	ft_initialize(t_option *opt)
+{
+	opt->flag_minus = 0;
+	opt->flag_zero = 0;
+	opt->width = 0;
+	opt->dot= 0; //to check precision
+	opt->precision = -1; //set as -1 instead of 0
+	opt->flag_pre_var = 0; //if precision is a variable argument
+	opt->neg_num = 0; //is a negative number?
+	opt->type = 0;
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+
+	g_tcount = 0;
+	va_start(args, format);
+	while (*format)
+	{
+		if(format != '%')
+		{
+			write(1, format, 1);
+			g_tcount++;
+		}
+		else
+		{
+			format = ft_format(format + 1, args);
+			if(!format)
+				return (-1);
+		}
+		++format;
+	}
+	va_end(args);
+	return(g_tcount);
+}
+
+
+/*
 int	check_args(va_list args, char arg)
 {
 	int	number;
@@ -58,43 +100,4 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (print_count);
 }
-
-
-/*extern int g_tcount;
-
-voidft_initialize(t_option *opt)
-{
-	opt->flag_minus = 0;
-	opt->flag_zero = 0;
-	opt->width = 0;
-	opt->dot= 0;
-	opt->precision = -1;
-	opt->flag_pre_var = 0;
-	opt->neg_num = 0;
-	opt->type = 0;
-}
-
-int	ft_printf(const char *format, ...)
-{
-	va_list	args;
-
-	g_tcount = 0;
-	va_start(args, format);
-	while (*format)
-	{
-		if(format != '%')
-		{
-			write(1. format, 1);
-			g_tcount++;
-		}
-		else
-		{
-
-		}
-		++format;
-	}
-	va_end(args);
-	return(g_tcount);
-}
 */
-
