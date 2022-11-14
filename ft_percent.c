@@ -6,7 +6,7 @@
 /*   By: joaonascimento <joaonascimento@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:58:40 by joaonascime       #+#    #+#             */
-/*   Updated: 2022/11/13 17:17:39 by joaonascime      ###   ########.fr       */
+/*   Updated: 2022/11/14 18:37:35 by joaonascime      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,17 @@
 
 char	ft_percent_array(t_option opt, int lenght)
 {
+	char	*str;
+	char	c;
 
+	c = '%';
+	if (!opt.flag_minus && !opt.flag_zero)
+		str = ft_left_blank(opt, lenght, &c);
+	else if (!opt.flag_minus && opt.flag_zero)
+		str = ft_left_zero(lenght, &c);
+	else
+		str = ft_right_zero(lenght, &c);
+	return (str);
 }
 
 int	ft_percent_type(t_option opt)

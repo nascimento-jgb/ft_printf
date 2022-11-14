@@ -6,12 +6,11 @@
 /*   By: joaonascimento <joaonascimento@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:05:10 by jonascim          #+#    #+#             */
-/*   Updated: 2022/11/12 15:03:26 by joaonascime      ###   ########.fr       */
+/*   Updated: 2022/11/14 18:37:40 by joaonascime      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 extern int g_tcount;
 

@@ -6,7 +6,7 @@
 /*   By: joaonascimento <joaonascimento@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 11:06:14 by joaonascime       #+#    #+#             */
-/*   Updated: 2022/11/12 15:03:24 by joaonascime      ###   ########.fr       */
+/*   Updated: 2022/11/14 18:37:37 by joaonascime      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ const char	*ft_set_precision(const char *start, t_option *opt, va_list args)
 	return (pntr);
 }
 
-char	 ft_check_type(char c)
+char	ft_check_type(char c)
 {
 	char *str;
 
@@ -118,11 +118,9 @@ static char	set_format(const char *pntr, va_list args)
 	start = ft_set_width(start, &opt, args);
 	if (*start == '.')
 		start = ft_set_precision(start, &opt, args);
-	//ft_has_type(*start);
 	if (!ft_check_type(*start))
 		return (NULL);
 	opt.type = *start;
-	//ft_apply_type(opt, args);
 	if (!ft_apply_type(opt,args))
 		return (NULL);
 	return (start);
