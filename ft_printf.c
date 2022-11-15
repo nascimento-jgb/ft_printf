@@ -3,100 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaonascimento <joaonascimento@student.    +#+  +:+       +#+        */
+/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 11:05:10 by jonascim          #+#    #+#             */
-/*   Updated: 2022/11/14 18:37:40 by joaonascime      ###   ########.fr       */
+/*   Created: 2022/11/15 09:36:53 by jonascim          #+#    #+#             */
+/*   Updated: 2022/11/15 13:52:21 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-extern int g_tcount;
-
-void	ft_initialize(t_option *opt)
+int	ft_formats(va_list args, const char format)
 {
-	opt->flag_minus = 0;
-	opt->flag_zero = 0;
-	opt->width = 0;
-	opt->dot= 0; //to check precision
-	opt->precision = -1; //set as -1 instead of 0
-	opt->flag_pre_var = 0; //if precision is a variable argument
-	opt->neg_num = 0; //is a negative number?
-	opt->type = 0;
+	int	len;
+
+	len = 0;
+	if (format == 'c')
+		len += ft_print_char(va_arg(args, int));
+	else if (format == 's')
+		len += ft_print_str(va_arg(args, char *));
+	else if (format == 'd' || format == 'i')
+		len += ft_print_nbr(va_arg(args, int));
+	else if (format == 'u')
+		len += ft_print_unsigned(va_arg(args, unsigned int));
+	else if (format == 'x' || format == 'X')
+		len += ft_print_hex(va_arg(args, unsigned int), format);
+	else if (format == 'p')
+		len += ft_print_ptr(va_arg(args, unsigned long long));
+	else if (format == '%')
+		len += ft_print_percent();
+	return (len);
 }
 
 int	ft_printf(const char *format, ...)
 {
+	int	i;
+	int	lenght;
 	va_list	args;
 
-	g_tcount = 0;
 	va_start(args, format);
-	while (*format)
+	i = 0;
+	lenght = 0;
+	while (format)
 	{
-		if(format != '%')
+		if (format[i] == '%')
 		{
-			write(1, format, 1);
-			g_tcount++;
+			lenght += ft_formats(args, format[i + 1]);
+			i++;
 		}
 		else
-		{
-			format = ft_format(format + 1, args);
-			if(!format)
-				return (-1);
-		}
-		++format;
+			lenght += ft_print_char(format[i]);
+		i++;
 	}
 	va_end(args);
-	return(g_tcount);
+	return (lenght);
 }
 
-
-/*
-int	check_args(va_list args, char arg)
+int	main (void)
 {
-	int	number;
+	int	res = ft_printf("Testing %d\n", 14);
+	int	res2 = printf("Testing %d\n", 15);
+	printf("\nres = %d\nres2 = %d\n", res, res2);
+	return (0);
 
-	number = 0;
-	if (arg == 'c')
-		number += ft_putchr(va_arg(args, char));
-	if (arg == 's')
-		number += ft_putstr(va_arg(args, char *));
-	if (arg == 'd' || arg == 'i')
-		number += ft_putnbr(va_arg(args, int));
-	if (arg == 'p')
-	{
-		write(1, "0x", 2);
-		number += print_ptr(va_arg(args, unsigned long long));
-	}
-	if (arg == 'u')
-		number += print_unsign(va_arg(args, unsigned int));
-	if (arg == 'x' || arg == 'X')
-		number += hexa_case(va_arg(args, unsigned long long), arg);
-	if (arg == '%')
-		number += print_percentage();
-	return (number);
 }
-
-int	ft_printf(const char *format, ...)
-{
-	va_list	args;
-	int		print_count;
-
-	print_count = 0;
-	va_start(args, format);
-	while (*format)
-	{
-		if(format != '%')
-			print_count += ft_putchar(format);
-		else
-		{
-			print_count += check_args(args, format + 1);
-			format++;
-		}
-		++format;
-	}
-	va_end(args);
-	return (print_count);
-}
-*/

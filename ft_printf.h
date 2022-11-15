@@ -3,36 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaonascimento <joaonascimento@student.    +#+  +:+       +#+        */
+/*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 11:13:06 by jonascim          #+#    #+#             */
-/*   Updated: 2022/11/14 18:07:48 by joaonascime      ###   ########.fr       */
+/*   Created: 2022/11/15 09:37:19 by jonascim          #+#    #+#             */
+/*   Updated: 2022/11/15 13:51:16 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <stdlib.h>
-#include <unistd.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <unistd.h>
 
-# define TYPE "cspdiuxX%"
+int		ft_print_percent(void);
+int		ft_print_char(int c);
+int		ft_print_str(char *str);
+int		ft_print_nbr(int nbr);
+int		ft_hex_len(unsigned int nbr);
+void	ft_put_hex(unsigned int nbr, const char format);
+int		ft_print_hex(unsigned int nbr, const char format);
+int		ft_unsigned_len(unsigned int nbr);
+char	*ft_unsigned_itoa(unsigned int nbr);
+int		ft_print_unsigned(unsigned int nbr);
+int		ft_ptr_len(uintptr_t ptr);
+void	ft_put_ptr(uintptr_t ptr);
+int		ft_print_ptr(unsigned long long ptr);
 
-int 	g_tcount;
-
-typedef struct	s_option
-{
-	int	flag_minus;
-	int	flag_zero;
-	int	width;
-	int	dot; //precison antecedent
-	int	precision; //initially set as -1/update to 1
-	int	flag_pre_var; //if precision is a variable argument
-	int	neg_num; //negative number
-	char	type;
-}	t_option;
-
-int	ft_printf(const char *, ...);
+void		ft_putchar_fd(char c, int fd);
+static int	len(long nb);
+char		*ft_itoa(int n);
 
 #endif
