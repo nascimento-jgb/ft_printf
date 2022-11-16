@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:06:39 by jonascim          #+#    #+#             */
-/*   Updated: 2022/11/16 10:17:51 by jonascim         ###   ########.fr       */
+/*   Updated: 2022/11/16 11:13:50 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	ft_put_hex(unsigned int nbr, const char format)
 		if (nbr <= 9)
 			ft_putchar_fd((nbr + '0'), 1);
 		else
-			{
-				if (format == 'X')
-					ft_putchar_fd((nbr - 10 + 'A'), 1);
-				if (format == 'x')
-					ft_putchar_fd((nbr - 10 + 'a'), 1);
-			}
+		{
+			if (format == 'X')
+				ft_putchar_fd((nbr - 10 + 'A'), 1);
+			if (format == 'x')
+				ft_putchar_fd((nbr - 10 + 'a'), 1);
+		}
 	}
 }
 

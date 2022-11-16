@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 09:36:53 by jonascim          #+#    #+#             */
-/*   Updated: 2022/11/16 09:40:07 by jonascim         ###   ########.fr       */
+/*   Updated: 2022/11/16 11:13:49 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	ft_formats(va_list args, const char format)
 
 int	ft_printf(const char *format, ...)
 {
-	int	i;
-	int	lenght;
+	int		i;
+	int		lenght;
 	va_list	args;
 
 	va_start(args, format);
